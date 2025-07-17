@@ -5,10 +5,10 @@ networks:
     #external: true #I created network already using docker network create roboshop
 services:
   mongodb:
-    image: mongodb:v1
+    image: kiran2655/mongodb:v1
     container_name: mongodb
   catalogue:
-    image: catalogue:v1
+    image: kiran2655/catalogue:v1
     container_name: catalogue
     depends_on:
     - mongodb
@@ -16,22 +16,22 @@ services:
     image: redis:7.0
     container_name: redis
   user:
-    image: user:v1
+    image: kiran2655/user:v1
     container_name: user
     depends_on:
     - redis
     - mongodb
   cart:
-    image: cart:v1
+    image: kiran2655/cart:v1
     container_name: cart
     depends_on:
     - catalogue
     - redis
   mysql:
-    image: mysql:v1
+    image: kiran2655/mysql:v1
     container_name: mysql
   shipping:
-    image: shipping:v1
+    image: kiran2655/shipping:v1
     container_name: shipping
     depends_on:
     - mysql
@@ -43,7 +43,7 @@ services:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
   payment:
-    image: payment:v1
+    image: kiran2655/payment:v1
     container_name: payment
     environment:
       CART_HOST: cart
@@ -58,7 +58,7 @@ services:
     - cart
     - user
   frontend:
-    image: frontend:v1
+    image: kiran2655/frontend:v1
     container_name: frontend
     ports:
     - "80:80"
